@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wanderquest-frontend
+  namespace: wanderquest-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wanderquest-frontend
+  template:
+    metadata:
+      labels:
+        app: wanderquest-frontend
+    spec:
+      containers:
+        - name: test
+          image: sandervandeurzen/wqfrontend:latest
+          ports:
+            - containerPort: 3000
