@@ -39,7 +39,7 @@ jobs:
           destination: node-build
   docker-config:
     docker:
-      - image: cimg/openjdk:21.0.2
+      - image: cimg/node:21.7.2
     steps:
       - checkout
       - setup_remote_docker:
