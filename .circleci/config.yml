@@ -45,9 +45,6 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: true
       - run:
-          name: Grade build
-          command: ./gradlew clean build
-      - run:
           name: Build and push Docker image
           command: |
             docker build -t $DOCKER_LOGIN/$APP_NAME:latest .
