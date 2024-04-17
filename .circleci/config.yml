@@ -8,6 +8,15 @@ orbs:
   kubernetes: circleci/kubernetes@1.3.1
 
 jobs:
+  test-node:
+    # Install node dependencies and run tests
+    executor: node/default
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: npm
+      - run:
+          name: Run tests
   build-node:
     # Build node project
     executor: node/default
@@ -39,6 +48,7 @@ jobs:
 workflows:
   build-and-test:
     jobs:
+      - test-node
       - build-node:
           requires:
             - test-node
