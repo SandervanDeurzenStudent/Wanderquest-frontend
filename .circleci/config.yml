@@ -37,6 +37,22 @@ jobs:
       - store_artifacts:
           path: ~/artifacts
           destination: node-build
+  docker-config:
+    docker:
+      - image: cimg/openjdk:21.0.2
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run:
+          name: Grade build
+          command: ./gradlew clean build
+      - run:
+          name: Build and push Docker image
+          command: |
+            docker build -t $DOCKER_LOGIN/$APP_NAME:latest .
+            echo $DOCKER_PASSWORD | docker login -u $DOCKER_LOGIN --password-stdin
+            docker push $DOCKER_LOGIN/$APP_NAME:latest
   deploy:
     # This is an example deploy job, not actually used by the workflow
     docker:
