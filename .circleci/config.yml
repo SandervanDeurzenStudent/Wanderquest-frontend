@@ -67,6 +67,8 @@ workflows:
           requires:
             - test-node
       - docker-config:
+          requires:
+            - build-node
           context:
             - wanderquest
     # - deploy:
