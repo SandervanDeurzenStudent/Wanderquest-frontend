@@ -82,6 +82,31 @@ jobs:
             git add manifests/kustomization.yaml
             git commit -am "Bumps docker tag [skip ci]"
             git push origin $CIRCLE_BRANCH
+  aks-deploy:
+    docker:
+      - image: cimg/base:current
+    parameters:
+      cluster-name:
+        description: |
+          Name of the AKS cluster.
+        type: string
+      resource-group:
+        description: |
+          Resource group that the cluster is in
+        type: string
+    steps:
+      - checkout
+      - run:
+          name: Pull Updated code from repo
+          command: git pull origin $CIRCLE_BRANCH
+      - azure-aks/update-kubeconfig-with-credentials:
+          cluster-name: << parameters.cluster-name >>
+          install-kubectl: true
+          perform-login: true
+          resource-group: << parameters.resource-group >>
+      - kubernetes/create-or-update-resource:
+          resource-file-path: manifests/$APP_NAME.yaml
+          resource-name: kustomization/$APP_NAME
 workflows:
   build-and-test:
     jobs:
@@ -97,6 +122,11 @@ workflows:
       - bump-docker-tag-kustomize:
           requires:
             - docker-config
+      - aks-deploy:
+          cluster-name: $CLUSTER_NAME
+          resource-group: $RESOURCE_GROUP
+          requires:
+            - bump-docker-tag-kustomize
     # - deploy:
     #     requires:
     #       - build-node
