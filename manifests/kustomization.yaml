@@ -6,6 +6,8 @@ resources:
 - namespace.yaml
 namespace: wanderquest-frontend
 images:
+- newName: /
+  newTag: c170491ff1645c5fd47685e3caac32329011a782
 - name: wanderquest-frontend-aks-app
   newName: sandervandeurzen/wanderquest-frontend-aks-app
   newTag: 7da4c40d74c000b483510019e7a3b3b030ecbd0f
