@@ -3,13 +3,13 @@ kind: Namespace
 metadata:
   labels:
     name: wanderquest-frontend
-  name: wanderquest-backend
+  name: wanderquest-frontend
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: wanderquest-frontend
-  namespace: wanderquest-backend
+  namespace: wanderquest-frontend
 spec:
   ports:
   - port: 3000
@@ -23,7 +23,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: wanderquest-frontend
-  namespace: wanderquest-backend
+  namespace: wanderquest-frontend
 spec:
   replicas: 1
   selector:
