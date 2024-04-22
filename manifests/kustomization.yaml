@@ -4,8 +4,8 @@ resources:
 - deployment.yaml
 - service.yaml
 - namespace.yaml
-namespace: wanderquest-backend
+namespace: wanderquest-frontend
 images:
-- name: wanderquest-backend-aks-app
-  newName: sandervandeurzen/wanderquest-backend-aks-app
+- name: wanderquest-frontend-aks-app
+  newName: sandervandeurzen/wanderquest-frontend-aks-app
   newTag: 7da4c40d74c000b483510019e7a3b3b030ecbd0f
