@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    name: wanderquest-frontend
+  name: wanderquest-backend
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wanderquest-frontend
+  namespace: wanderquest-backend
+spec:
+  ports:
+  - port: 3000
+    protocol: TCP
+    targetPort: 3000
+  selector:
+    app: wanderquest-frontend
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wanderquest-frontend
+  namespace: wanderquest-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wanderquest-frontend
+  template:
+    metadata:
+      labels:
+        app: wanderquest-frontend
+    spec:
+      containers:
+      - image: sandervandeurzen/wqfrontend:latest
+        name: test
+        ports:
+        - containerPort: 3000
