@@ -9,5 +9,5 @@ images:
 - newName: /
   newTag: 9269536029565b6a62130445a3f926e62e627e80
 - name: wanderquest-frontend-aks-app
-  newName: sandervandeurzen/wanderquest-frontend-aks-app
-  newTag: 7da4c40d74c000b483510019e7a3b3b030ecbd0f
+  newName: /wanderquest-frontend-aks-app
+  newTag: c7063030bd81500bfe711eacbc7ce1a1ea69beb3
