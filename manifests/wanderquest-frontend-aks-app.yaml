@@ -12,13 +12,12 @@ metadata:
   namespace: wanderquest-frontend
 spec:
   ports:
-  - nodePort: 31000
-    port: 3000
+  - port: 3000
     protocol: TCP
     targetPort: 3000
   selector:
     app: wanderquest-frontend
-  type: NodePort
+  type: LoadBalancer
 ---
 apiVersion: apps/v1
 kind: Deployment
