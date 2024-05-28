@@ -1,45 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
-import { useState, useEffect } from 'react';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import UserList from './components/User/UserList';
+import HomePage from './pages/HomePage';
+import UserPage from './pages/UserPage';
+import AddUserPage from './pages/AddUserPage';  // Importeer de nieuwe pagina
 
 function App() {
-  const [apiData, setApiData] = useState(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('http://localhost:8080');
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const data = await response.text();
-        setApiData(data);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            {apiData ? `API Response: ${apiData}` : 'Loadingg...'}
-          </p>
-          <a
-              className="App-link"
-              href="https://reactjs.org"
-              target="_blank"
-              rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-  );
+    return (
+        <Router>
+            <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/users" element={<UserList />} />
+                <Route path="/user/:id" element={<UserPage />} />
+                <Route path="/add-user" element={<AddUserPage />} />
+            </Routes>
+        </Router>
+    );
 }
 
 export default App;
