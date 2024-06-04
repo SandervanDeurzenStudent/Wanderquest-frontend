@@ -13,15 +13,17 @@ export default [
         __dirname: "readonly"
       },
       ecmaVersion: 12,
-      sourceType: "module",
-      ecmaFeatures: {
-        jsx: true
-      }
+      sourceType: "module"
     },
     env: {
       browser: true,
       node: true,
       jest: true
+    },
+    parserOptions: {
+      ecmaFeatures: {
+        jsx: true
+      }
     }
   },
   pluginJs.configs.recommended,
