@@ -42,7 +42,7 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Authenticate Snyk
+          name: Authenticate Snyks
           command: snyk auth $SNYK_TOKEN
       - run:
           name: Run Snyk test
