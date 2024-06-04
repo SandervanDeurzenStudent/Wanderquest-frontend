@@ -42,7 +42,6 @@ jobs:
           name: Run ESLint
           command: npm run lint
   snyk-scan:
-    executor: docker/default
     docker:
       - image: snyk/snyk:docker
     steps:
@@ -54,7 +53,6 @@ jobs:
           name: Snyk monitor
           command: snyk monitor
   docker-config:
-    executor: docker/default
     docker:
       - image: cimg/node:21.7.2
     steps:
@@ -68,7 +66,6 @@ jobs:
             echo $DOCKER_PASSWORD | docker login -u $DOCKER_LOGIN --password-stdin
             docker push $DOCKER_LOGIN/$APP_NAME:latest
   bump-docker-tag-kustomize:
-    executor: docker/default
     docker:
       - image: cimg/base:current
     steps:
@@ -101,7 +98,6 @@ jobs:
             git commit -am "Bumps docker tag [skip ci]"
             git push origin $CIRCLE_BRANCH
   aks-deploy:
-    executor: docker/default
     docker:
       - image: cimg/base:current
     parameters:
