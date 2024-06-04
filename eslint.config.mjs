@@ -23,6 +23,6 @@ export default [
       "jsdoc/check-values": "error"
     }
   },
-  pluginReactConfig,
+  // Verwijder de tweede configuratie van de 'react' plugin
   ...fixupConfigRules(pluginReactConfig)
 ];
