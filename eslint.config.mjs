@@ -19,7 +19,9 @@ export default [
         jest: "readonly"
       }
     },
-    plugins: ["react"],
+    plugins: {
+      react: pluginReactConfig
+    },
     rules: {
       // Voeg hier JavaScript lintregels toe
       // Bijvoorbeeld:
