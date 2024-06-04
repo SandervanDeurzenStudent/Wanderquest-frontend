@@ -8,7 +8,7 @@ export default [
     files: ["**/*.js"],
     languageOptions: {
       parser: babelParser,
-      requireConfigFile: false, // Dit uitschakelen als je geen Babel config bestand hebt
+      requireConfigFile: false, // Schakel dit uit als je geen Babel-configuratiebestand hebt
       globals: {
         require: "readonly",
         module: "readonly",
