@@ -4,18 +4,16 @@ import { fixupConfigRules } from "@eslint/compat";
 
 export default [
   {
-    languageOptions: {
-      parserOptions: {
-        ecmaVersion: 12,
-        sourceType: "module",
-        ecmaFeatures: {
-          jsx: true
-        }
-      },
-      settings: {
-        react: {
-          version: "detect"
-        }
+    parserOptions: {
+      ecmaVersion: 12,
+      sourceType: "module",
+      ecmaFeatures: {
+        jsx: true
+      }
+    },
+    settings: {
+      react: {
+        version: "detect"
       }
     },
     plugins: ["react"],
