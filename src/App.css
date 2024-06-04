@@ -2,6 +2,11 @@
   text-align: center;
 }
 
+.app-container {
+  display: flex;
+  height: 100%;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -35,4 +40,109 @@
   to {
     transform: rotate(360deg);
   }
+}
+.sidebar {
+  width: 200px;
+  height: 100vh; /* Hier wordt de hoogte ingesteld op 100% van de viewporthoogte */
+  background-color: #282c34;
+  color: white;
+  padding: 20px;
+  position: fixed; /* Hiermee wordt de sidebar gepositioneerd ten opzichte van het venster */
+  top: 0; /* Plaats de sidebar bovenaan */
+  left: 0; /* Plaats de sidebar aan de linkerkant */
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px;
+  margin-left: 250px; /* Voeg wat ruimte toe aan de linkerkant om ruimte te maken voor de sidebar */
+}
+
+/* Aanvullende stijlen voor de links in de sidebar */
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  margin-bottom: 10px;
+}
+
+.sidebar ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+.sidebar ul li a:hover {
+  text-decoration: underline;
+}
+
+/* Aanvullende stijlen voor de knoppen binnen de main-content */
+.user-buttons button {
+  margin-right: 10px;
+  background-color: #61dafb;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.user-buttons button:hover {
+  background-color: #42a5f5;
+}
+.form-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-container h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.form-container form div {
+  margin-bottom: 15px;
+}
+
+.form-container label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #555;
+}
+
+.form-container input[type="text"],
+.form-container input[type="email"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.form-container input[type="text"]:focus,
+.form-container input[type="email"]:focus {
+  border-color: #61dafb;
+  outline: none;
+}
+
+.form-container button[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  background-color: #61dafb;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.form-container button[type="submit"]:hover {
+  background-color: #42a5f5;
 }
