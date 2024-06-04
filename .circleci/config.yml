@@ -27,7 +27,7 @@ jobs:
           pkg-manager: npm
       - run:
           name: Run ESLint
-          command: npx eslint .
+          command: npm run lint
   build-node:
     executor: node/default
     steps:
