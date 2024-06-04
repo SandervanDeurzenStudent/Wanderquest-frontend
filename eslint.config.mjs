@@ -1,9 +1,14 @@
+import jsdoc from "eslint-plugin-jsdoc";
+import babelParser from "@babel/eslint-parser";
+import pluginReactConfig from "eslint-plugin-react/configs/recommended.js";
+import { fixupConfigRules } from "@eslint/compat";
+
 export default [
   {
     files: ["**/*.js"],
     languageOptions: {
       parser: babelParser,
-      requireConfigFile: false, // Voeg deze regel toe
+      requireConfigFile: false, // Dit uitschakelen als je geen Babel config bestand hebt
       globals: {
         require: "readonly",
         module: "readonly",
@@ -19,5 +24,6 @@ export default [
       "jsdoc/check-values": "error"
     }
   },
-  // Fixup regels en configuraties
+  pluginReactConfig,
+  ...fixupConfigRules(pluginReactConfig)
 ];
