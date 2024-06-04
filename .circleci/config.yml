@@ -1,5 +1,3 @@
-# This config was automatically generated from your source code
-# Stacks detected: deps:node:.
 version: 2.1
 orbs:
   node: circleci/node@5
@@ -9,7 +7,6 @@ orbs:
 
 jobs:
   test-node:
-    # Install node dependencies and run tests
     executor: node/default
     steps:
       - checkout
@@ -19,7 +16,6 @@ jobs:
           name: Run tests
           command: npm test --passWithNoTests
   build-node:
-    # Build node project
     executor: node/default
     steps:
       - checkout
@@ -30,13 +26,44 @@ jobs:
       - run:
           name: Create the ~/artifacts directory if it doesn't exist
           command: mkdir -p ~/artifacts
-      # Copy output to artifacts dir
       - run:
           name: Copy artifacts
           command: cp -R build dist public .output .next .docusaurus ~/artifacts 2>/dev/null || true
       - store_artifacts:
           path: ~/artifacts
           destination: node-build
+  lint-code:
+    executor: node/default
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: npm
+      - run:
+          name: Run ESLint
+          command: npm run lint
+  snyk-scan:
+    docker:
+      - image: snyk/snyk:docker
+    steps:
+      - checkout
+      - run:
+          name: Snyk test
+          command: snyk test
+      - run:
+          name: Snyk monitor
+          command: snyk monitor
+  owasp-zap:
+    docker:
+      - image: owasp/zap2docker-stable
+    steps:
+      - checkout
+      - run:
+          name: OWASP ZAP Baseline Scan
+          command: >
+            zap-baseline.py -t http://localhost:8080 -r zap_report.html
+      - store_artifacts:
+          path: zap_report.html
+          destination: security-reports
   docker-config:
     docker:
       - image: cimg/node:21.7.2
@@ -87,12 +114,10 @@ jobs:
       - image: cimg/base:current
     parameters:
       cluster-name:
-        description: |
-          Name of the AKS cluster.
+        description: Name of the AKS cluster.
         type: string
       resource-group:
-        description: |
-          Resource group that the cluster is in
+        description: Resource group that the cluster is in
         type: string
     steps:
       - checkout
@@ -111,9 +136,15 @@ workflows:
   build-and-test:
     jobs:
       - test-node
+      - lint-code
+      - snyk-scan
+      - owasp-zap
       - build-node:
           requires:
             - test-node
+            - lint-code
+            - snyk-scan
+            - owasp-zap
       - docker-config:
           requires:
             - build-node
@@ -129,6 +160,3 @@ workflows:
             - bump-docker-tag-kustomize
           context:
             - wanderquest
-    # - deploy:
-    #     requires:
-    #       - build-node
