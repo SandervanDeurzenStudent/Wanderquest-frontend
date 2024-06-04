@@ -40,6 +40,9 @@ jobs:
       - run:
           name: Authenticate Snyk
           command: snyk auth $SNYK_TOKEN
+      - run:
+          name: Run Snyk test
+          command: snyk test
     environment:
       SNYK_TOKEN: "74eee921-3efe-4488-adce-fe1d7b21a00b"
   docker-config:
