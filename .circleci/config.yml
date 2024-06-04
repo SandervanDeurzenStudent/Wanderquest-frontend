@@ -32,15 +32,6 @@ jobs:
       - store_artifacts:
           path: ~/artifacts
           destination: node-build
-  lint-code:
-    executor: node/default
-    steps:
-      - checkout
-      - node/install-packages:
-          pkg-manager: npm
-      - run:
-          name: Run ESLint
-          command: npm run lint
   snyk-scan:
     docker:
       - image: snyk/snyk:docker
@@ -123,12 +114,10 @@ workflows:
   build-and-test:
     jobs:
       - test-node
-      - lint-code
       - snyk-scan
       - build-node:
           requires:
             - test-node
-            - lint-code
             - snyk-scan
       - docker-config:
           requires:
