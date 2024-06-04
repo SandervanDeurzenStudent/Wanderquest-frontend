@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createUser } from '../api/userApi';
+import './AddUserPage.css'; // Vergeet niet je CSS-bestand te importeren
 
 const AddUserPage = () => {
     const [name, setName] = useState('');
@@ -15,11 +16,11 @@ const AddUserPage = () => {
     };
 
     return (
-        <div>
+        <div className="form-container">
             <h1>Add User</h1>
             <form onSubmit={handleSubmit}>
                 <div>
-                    <label>Name:</label>
+                    <label>Name:</label><br/>
                     <input
                         type="text"
                         value={name}
@@ -28,7 +29,7 @@ const AddUserPage = () => {
                     />
                 </div>
                 <div>
-                    <label>Email:</label>
+                    <label>Email:</label><br/>
                     <input
                         type="email"
                         value={email}
