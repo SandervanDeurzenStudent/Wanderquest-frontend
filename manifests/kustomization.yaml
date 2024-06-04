@@ -10,4 +10,4 @@ images:
   newTag: 9269536029565b6a62130445a3f926e62e627e80
 - name: wanderquest-frontend-aks-app
   newName: /wanderquest-frontend-aks-app
-  newTag: 2ff67357042dce3f877b943b78a22ff5e771b5ee
+  newTag: e8e854b216162a59c09571830a9c02039d858ea1
