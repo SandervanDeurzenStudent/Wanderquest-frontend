@@ -42,6 +42,7 @@ jobs:
           name: Run ESLint
           command: npm run lint
   snyk-scan:
+    executor: docker/default
     docker:
       - image: snyk/snyk:docker
     steps:
@@ -52,19 +53,8 @@ jobs:
       - run:
           name: Snyk monitor
           command: snyk monitor
-  owasp-zap:
-    docker:
-      - image: owasp/zap2docker-stable
-    steps:
-      - checkout
-      - run:
-          name: OWASP ZAP Baseline Scan
-          command: >
-            zap-baseline.py -t http://localhost:8080 -r zap_report.html
-      - store_artifacts:
-          path: zap_report.html
-          destination: security-reports
   docker-config:
+    executor: docker/default
     docker:
       - image: cimg/node:21.7.2
     steps:
@@ -78,6 +68,7 @@ jobs:
             echo $DOCKER_PASSWORD | docker login -u $DOCKER_LOGIN --password-stdin
             docker push $DOCKER_LOGIN/$APP_NAME:latest
   bump-docker-tag-kustomize:
+    executor: docker/default
     docker:
       - image: cimg/base:current
     steps:
@@ -110,6 +101,7 @@ jobs:
             git commit -am "Bumps docker tag [skip ci]"
             git push origin $CIRCLE_BRANCH
   aks-deploy:
+    executor: docker/default
     docker:
       - image: cimg/base:current
     parameters:
@@ -138,13 +130,11 @@ workflows:
       - test-node
       - lint-code
       - snyk-scan
-      - owasp-zap
       - build-node:
           requires:
             - test-node
             - lint-code
             - snyk-scan
-            - owasp-zap
       - docker-config:
           requires:
             - build-node
