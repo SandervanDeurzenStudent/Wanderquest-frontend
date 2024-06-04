@@ -1,17 +1,13 @@
-import pluginJs from "@eslint/js";
+import jsdoc from "eslint-plugin-jsdoc";
+import babelParser from "@babel/eslint-parser";
 import pluginReactConfig from "eslint-plugin-react/configs/recommended.js";
 import { fixupConfigRules } from "@eslint/compat";
 
 export default [
   {
+    files: ["**/*.js"],
     languageOptions: {
-      parserOptions: {
-        ecmaVersion: 12,
-        sourceType: "module",
-        ecmaFeatures: {
-          jsx: true
-        }
-      },
+      parser: babelParser,
       globals: {
         require: "readonly",
         module: "readonly",
@@ -20,16 +16,13 @@ export default [
       }
     },
     plugins: {
-      react: pluginReactConfig
+      jsdoc: jsdoc
     },
     rules: {
-      // Voeg hier JavaScript lintregels toe
-      // Bijvoorbeeld:
-      // "indent": ["error", 2],
-      // "quotes": ["error", "single"],
-      // "semi": ["error", "always"]
+      "jsdoc/require-description": "error",
+      "jsdoc/check-values": "error"
     }
   },
-  pluginJs.configs.recommended,
+  pluginReactConfig,
   ...fixupConfigRules(pluginReactConfig)
 ];
