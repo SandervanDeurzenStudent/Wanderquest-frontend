@@ -5,24 +5,25 @@ import { fixupConfigRules } from "@eslint/compat";
 
 export default [
   {
-    languageOptions: {
-      globals: {
-        ...globals.browser,
-        require: "readonly",
-        module: "readonly",
-        __dirname: "readonly",
-        jest: "readonly"
-      },
-      ecmaVersion: 12,
-      sourceType: "module",
+    globals: {
+      ...globals.browser,
+      require: "readonly",
+      module: "readonly",
+      __dirname: "readonly",
+      jest: "readonly"
+    },
+    env: {
+      browser: true,
+      es2021: true
+    },
+    parser: "@babel/eslint-parser",
+    parserOptions: {
       ecmaFeatures: {
         jsx: true
-      }
-    }
-  },
-  pluginJs.configs.recommended,
-  ...fixupConfigRules(pluginReactConfig),
-  {
+      },
+      ecmaVersion: 12,
+      sourceType: "module"
+    },
     settings: {
       react: {
         version: "detect"
@@ -35,5 +36,7 @@ export default [
       quotes: ["error", "single"],
       semi: ["error", "always"]
     }
-  }
+  },
+  pluginJs.configs.recommended,
+  ...fixupConfigRules(pluginReactConfig)
 ];
