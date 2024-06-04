@@ -52,6 +52,8 @@ jobs:
       - run:
           name: Snyk monitor
           command: snyk monitor
+        environment:
+            SNYK_TOKEN: "74eee921-3efe-4488-adce-fe1d7b21a00b"
   docker-config:
     docker:
       - image: cimg/node:21.7.2
