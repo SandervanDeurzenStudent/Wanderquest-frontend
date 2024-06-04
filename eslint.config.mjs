@@ -10,17 +10,11 @@ export default [
         ...globals.browser,
         require: "readonly",
         module: "readonly",
-        __dirname: "readonly"
+        __dirname: "readonly",
+        jest: "readonly"
       },
       ecmaVersion: 12,
-      sourceType: "module"
-    },
-    env: {
-      browser: true,
-      node: true,
-      jest: true
-    },
-    parserOptions: {
+      sourceType: "module",
       ecmaFeatures: {
         jsx: true
       }
