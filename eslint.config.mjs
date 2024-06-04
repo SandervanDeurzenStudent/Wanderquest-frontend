@@ -12,10 +12,11 @@ export default [
           jsx: true
         }
       },
-      settings: {
-        react: {
-          version: "detect"
-        }
+      globals: {
+        require: "readonly",
+        module: "readonly",
+        __dirname: "readonly",
+        jest: "readonly"
       }
     },
     plugins: ["react"],
@@ -28,15 +29,5 @@ export default [
     }
   },
   pluginJs.configs.recommended,
-  ...fixupConfigRules(pluginReactConfig),
-  {
-    languageOptions: {
-      globals: {
-        require: "readonly",
-        module: "readonly",
-        __dirname: "readonly",
-        jest: "readonly"
-      }
-    }
-  }
+  ...fixupConfigRules(pluginReactConfig)
 ];
