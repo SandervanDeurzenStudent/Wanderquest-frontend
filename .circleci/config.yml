@@ -121,14 +121,13 @@ jobs:
           resource-name: kustomization/$APP_NAME
   sonarcloud-scan:
     docker:
-      - image: circleci/node:14-browsers
+      - image: circleci/node:14-browsers  # Keep your preferred Node.js version
     steps:
       - checkout
       - run:
           name: Install SonarScanner
+          # No need for manual apt-get update, orb likely handles it
           command: |
-            apt-get update && \
-            apt-get install -y unzip && \
             curl -sSL -o sonar-scanner-cli.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip && \
             unzip sonar-scanner-cli.zip && \
             export PATH="$PWD/sonar-scanner-4.6.2.2472-linux/bin:$PATH"
@@ -140,6 +139,7 @@ jobs:
             -Dsonar.sources=. \
             -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.login="560f6e98b54d53caa92d22cf952c6080231af154"
+
 workflows:
   build-and-test:
     jobs:
