@@ -125,7 +125,8 @@ jobs:
     steps:
       - checkout
       - sonarcloud/scan
-    context: sonarcloud
+    environment:
+      SONAR_TOKEN: "560f6e98b54d53caa92d22cf952c6080231af154"
 
 workflows:
   build-and-test:
@@ -135,8 +136,6 @@ workflows:
       - sonarcloud-scan:
           requires:
             - snyk-scan
-          context:
-            - sonarcloud
       - build-node:
           requires:
             - test-node
