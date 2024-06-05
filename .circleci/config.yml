@@ -121,7 +121,7 @@ jobs:
           resource-name: kustomization/$APP_NAME
   sonarcloud-scan:
     docker:
-      - image: node:latest
+      - image: circleci/node:14-browsers
     steps:
       - checkout
       - run:
@@ -140,7 +140,6 @@ jobs:
             -Dsonar.sources=. \
             -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.login="560f6e98b54d53caa92d22cf952c6080231af154"
-
 workflows:
   build-and-test:
     jobs:
