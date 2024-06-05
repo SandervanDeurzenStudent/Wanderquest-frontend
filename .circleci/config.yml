@@ -121,7 +121,7 @@ jobs:
           resource-name: kustomization/$APP_NAME
   sonarcloud-scan:
     docker:
-      - image: circleci/node:14-browsers
+      - image: node:lts
     steps:
       - checkout
       - run:
