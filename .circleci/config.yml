@@ -132,7 +132,7 @@ jobs:
             unzip sonar-scanner-cli.zip && \
             export PATH="$PWD/sonar-scanner-4.6.2.2472-linux/bin:$PATH"
       - run:
-          name: SonarCloud Scan
+          name: SonarCloud Scann
           command: sonar-scanner \
             -Dsonar.projectKey="SandervanDeurzenStudent_WanderQuest-frontend" \
             -Dsonar.organization="sandervandeurzenstudent" \
