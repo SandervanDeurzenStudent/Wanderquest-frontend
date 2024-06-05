@@ -125,14 +125,16 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Install SonarScanner
-          # No need for manual apt-get update, orb likely handles it
+          name: Download SonarScanner
           command: |
-            curl -sSL -o sonar-scanner-cli.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip && \
-            unzip sonar-scanner-cli.zip && \
-            export PATH="$PWD/sonar-scanner-4.6.2.2472-linux/bin:$PATH"
+            curl -sSL -o sonar-scanner-cli.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/latest
+            unzip sonar-scanner-cli.zip
       - run:
-          name: SonarCloud Scann
+          name: Add SonarScanner to PATH
+          command: |
+            export PATH="$PWD/sonar-scanner-*/bin:$PATH"  # Adjust directory name if needed
+      - run:
+          name: SonarCloud Scan
           command: sonar-scanner \
             -Dsonar.projectKey="SandervanDeurzenStudent_WanderQuest-frontend" \
             -Dsonar.organization="sandervandeurzenstudent" \
