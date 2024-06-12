@@ -12,9 +12,9 @@ metadata:
   namespace: wanderquest-frontend
 spec:
   ports:
-  - port: 3000
+  - port: 1000
     protocol: TCP
-    targetPort: 3000
+    targetPort: 1000
   selector:
     app: wanderquest-frontend
   type: LoadBalancer
