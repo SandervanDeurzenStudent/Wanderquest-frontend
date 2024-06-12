@@ -44,6 +44,11 @@
     text-align: left;
     margin-top: 20px;
 }
+.gdpr-details {
+    max-height: 300px; /* Stel hier de gewenste maximale hoogte van het scrollbare gedeelte in */
+    overflow-y: auto; /* Hiermee wordt een verticale scrollbar toegevoegd indien nodig */
+}
+
 
 .gdpr-details h3 {
     margin-top: 10px;

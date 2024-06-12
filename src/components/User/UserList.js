@@ -5,12 +5,20 @@ import UserDetail from './UserDetail';
 
 const UserList = () => {
     const [users, setUsers] = useState([]);
-    const navigate = useNavigate();
+    const [error, setError] = useState(null); // State to manage error message
 
     useEffect(() => {
         const fetchUsers = async () => {
-            const usersData = await getAllUsers();
-            setUsers(usersData);
+            try {
+                const usersData = await getAllUsers();
+                if (usersData.length === 0) {
+                    setError('Oops! there was an issue fetching the users. I think the Userservice is not running ;)');
+                } else {
+                    setUsers(usersData);
+                }
+            } catch (error) {
+                setError('Oops! there was an issue fetching the users. I think the Userservice is not running ;)');
+            }
         };
 
         fetchUsers();
@@ -19,14 +27,17 @@ const UserList = () => {
     return (
         <div>
             <h1>User List</h1>
-            <button onClick={() => navigate('/add-user')}>Add User</button>
-            <ul>
-                {users.map(user => (
-                    <li key={user.id}>
-                        <UserDetail user={user} />
-                    </li>
-                ))}
-            </ul>
+            {error ? (
+                <p>{error}</p>
+            ) : (
+                <ul>
+                    {users.map(user => (
+                        <li key={user.id}>
+                            <UserDetail user={user} />
+                        </li>
+                    ))}
+                </ul>
+            )}
         </div>
     );
 };
