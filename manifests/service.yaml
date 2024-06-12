@@ -7,6 +7,6 @@ spec:
     app: wanderquest-frontend
   ports:
     - protocol: TCP
-      port: 3000
-      targetPort: 3000
+      port: 1000
+      targetPort: 1000
   type: LoadBalancer
